@@ -94,6 +94,7 @@ router.post("/posts/:id/edit", async function (req, res) {
     title: req.body.title,
     summary: req.body.summary,
     body: req.body.content,
+    date: new Date(),
   };
 
   const result = await db

@@ -52,10 +52,6 @@ router.post("/posts", async function (req, res) {
 router.get("/posts/:id", async function (req, res) {
   const postId = req.params.id;
 
-  // if (!mongodb.ObjectId.isValid(postId)) {
-  //   return res.status(404).render("404");
-  // }
-
   const post = await db
     .getDb()
     .collection("posts")
@@ -65,13 +61,13 @@ router.get("/posts/:id", async function (req, res) {
     return res.status(404).render("404");
   }
 
-  // post.humanReadableDate = post.date.toLocaleDateString("en-US", {
-  //   weekday: "long",
-  //   year: "numeric",
-  //   month: "long",
-  //   day: "numeric",
-  // });
-  // post.date = post.date.toISOString();
+  post.humanReadableDate = post.date.toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  post.date = post.date.toISOString();
 
   res.render("post-detail", { post: post });
 });
